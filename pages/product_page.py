@@ -7,13 +7,21 @@ class ProductPage(BasePage):
         buy_button = self.browser.find_element(*ProductPageLocators.BUY_BUTTON)
         buy_button.click()
 
+    def should_not_be_success_message(self):
+        assert self.is_not_element_present(*ProductPageLocators.SUCCES_ALERT_BUY), \
+            "Success buy message is presented, but should not be"
+
+    def buy_message_should_disappeared(self):
+        assert self.is_disappeared(*ProductPageLocators.SUCCES_ALERT_BUY),  \
+            "Success buy alert doesnt disappear"
+
     def should_be_right_book(self):
-        self.should_be_succes_alert()
+        self.should_be_success_alert()
         self.should_be_cost_alert()
         self.should_be_right_name()
         self.should_be_right_cost()
 
-    def should_be_succes_alert(self):
+    def should_be_success_alert(self):
         assert self.is_element_present(*ProductPageLocators.SUCCES_ALERT_BUY), "There is no succes alert!"
 
     def should_be_cost_alert(self):
