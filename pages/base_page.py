@@ -1,4 +1,3 @@
-import pytest
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
 from selenium.common.exceptions import TimeoutException
@@ -47,7 +46,6 @@ class BasePage():
         alert.send_keys(answer)
         alert.accept()
         try:
-            #self.browser.implicitly_wait(10)
             alert = self.browser.switch_to.alert
             alert_text = alert.text
             print(f"Your code: {alert_text}")

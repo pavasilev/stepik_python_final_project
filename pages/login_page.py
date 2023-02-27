@@ -1,8 +1,5 @@
 from .base_page import BasePage
 from .locators import LoginPageLocators
-from selenium.webdriver.common.by import By
-import time
-
 
 class LoginPage(BasePage):
     def should_be_login_page(self):
@@ -11,21 +8,18 @@ class LoginPage(BasePage):
         self.should_be_register_form()
 
     def should_be_login_url(self):
-        # реализуйте проверку на корректный url адрес
         url = str(self.browser.current_url)
         index = url.find("login")
         print(index)
-        assert index != -1,"It is not login page!"
+        assert index != -1, "It is not login page!"
 
     def should_be_login_form(self):
-        # реализуйте проверку, что есть форма логина
         assert self.is_element_present(*LoginPageLocators.LOGIN_FORM), "There is no login form"
 
     def should_be_register_form(self):
-        # реализуйте проверку, что есть форма регистрации на странице
         assert self.is_element_present(*LoginPageLocators.REGISTRATION_FORM), "There is no registration form"
 
-    def register_new_user(self,email, password):
+    def register_new_user(self, email, password):
         email_field = self.browser.find_element(*LoginPageLocators.EMAIL_FIELD)
         email_field.send_keys(email)
         password_field = self.browser.find_element(*LoginPageLocators.PASSWORD_FIELD)
@@ -34,4 +28,3 @@ class LoginPage(BasePage):
         password_repeat.send_keys(password)
         button_enter = self.browser.find_element(*LoginPageLocators.ENTER_BUTTON)
         button_enter.click()
-
